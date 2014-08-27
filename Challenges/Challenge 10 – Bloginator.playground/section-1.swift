@@ -82,9 +82,14 @@ property to the value returned from “randomAuthor” function and set
 the “order” property to the value of the index of the for loop used to
 populate this array.
 **/
-// implement code for R4 below
 
-
+var blogPosts = Array<BlogPost>()
+for i in 0...9 {
+    let randAuthor = randomAuthor()
+    var blogPost = BlogPost(author: randAuthor.0, email: randAuthor.1)
+    blogPost.order = i
+    blogPosts.append(blogPost)
+}
 
 /**
 R5 – Create a “randomViews” function that accepts the “type” of blog post
@@ -95,9 +100,25 @@ the views are 10, 0 if the views are either 20 or 30, else return the randomly
 selected number of views. If the “type” passed to the function is
 “cat videos” always return nil.
 **/
-// implement code for R5 below
 
-
+func randomViews(type: String) -> (Int?) {
+    if type == "cat videos" {
+        return nil
+    }
+    
+    let ints = [10, 20, 30, 40, 50]
+    
+    let randomInt = ints[Int(arc4random_uniform(UInt32(ints.count)))]
+    
+    switch randomInt {
+    case 10:
+        return nil;
+    case 20, 30:
+        return 0;
+    default:
+        return randomInt;
+    }
+}
 
 /**
 R6 – Iterate the array of blog posts, generate a value from “randomViews” function
