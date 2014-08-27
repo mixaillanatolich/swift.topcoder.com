@@ -120,6 +120,7 @@ func randomViews(type: String) -> (Int?) {
     }
 }
 
+
 /**
 R6 – Iterate the array of blog posts, generate a value from “randomViews” function
 for each one and set it to the blog post “views” property. Then println the
@@ -127,7 +128,10 @@ value of each post.teaser().
 **/
 // implement code for R6 below
 
-
+for post in blogPosts {
+    post.views = randomViews(post.type)
+    println(post.teaser())
+}
 
 /**
 R7 – Write a simple stack using a struct with Generics
@@ -138,6 +142,81 @@ the stack. Use a for loop to iterate the “blogs” stack, pop the top one
 off and println the blog’s teaser. Println the count of items in the stack.
 **/
 // implement code for R7 below
+
+
+struct Blogs {
+    var blogs = [BlogPost]()
+    
+    mutating func push(blog: BlogPost) -> () {
+        blogs.append(blog)
+    }
+    
+    mutating func pop() -> (BlogPost?) {
+        if !blogs.isEmpty {
+            return blogs.removeLast()
+        } else {
+            return nil
+        }
+    }
+    
+    func count() -> (Int) {
+        return blogs.count
+    }
+}
+
+var blogs = Blogs()
+
+for post in blogPosts {
+    blogs.push(post)
+}
+
+println("count of items in the stack: \(blogs.count())")
+
+let blogsCount = blogs.count()
+for var i = 0; i < blogsCount; i++ {
+    var blogPost: BlogPost = blogs.pop()!
+    println(blogPost.teaser())
+}
+
+println("count of items in the stack: \(blogs.count())")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
